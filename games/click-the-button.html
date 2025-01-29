@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Button</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #4A90E2;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background-color: #357ABD;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.5em;
+            display: none;
+        }
+    </style>
+    <script>
+        let targetClicks = 0;
+        let clicks = 0;
+
+        function startGame() {
+            targetClicks = parseInt(prompt("Enter your target score:"), 10) || 10;
+            clicks = 0;
+            updateCounter();
+        }
+        
+        function updateCounter() {
+            document.getElementById("counter").innerText = `Clicks: ${clicks}/${targetClicks}`;
+        }
+
+        function handleClick() {
+            if (clicks < targetClicks) {
+                clicks++;
+                updateCounter();
+            }
+            if (clicks >= targetClicks) {
+                document.getElementById("winMessage").style.display = "block";
+                setTimeout(() => {
+                    window.location.href = "../index.html";
+                }, 2000);
+            }
+        }
+
+        window.onload = startGame;
+    </script>
+</head>
+<body>
+    <h1>Click the Button</h1>
+    <p id="counter">Clicks: 0/0</p>
+    <button class="button" onclick="handleClick()">Click</button>
+    <p id="winMessage" class="message">Ya win!</p>
+</body>
+</html>
